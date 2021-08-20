@@ -1,6 +1,221 @@
 {
   "version": 1,
   "projects": {
+    "mobile-client": {
+      "projectType": "application",
+      "root": "apps/mobile-client",
+      "sourceRoot": "apps/mobile-client/src",
+      "prefix": "food-delivery-workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/mobile-client",
+            "index": "apps/mobile-client/src/index.html",
+            "main": "apps/mobile-client/src/main.ts",
+            "polyfills": "apps/mobile-client/src/polyfills.ts",
+            "tsConfig": "apps/mobile-client/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/mobile-client/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "apps/mobile-client/src/styles.scss",
+              {
+                "input": "apps\\mobile-client/src/theme/variables.scss"
+              }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/mobile-client/src/environments/environment.ts",
+                  "with": "apps/mobile-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "mobile-client:build:production"
+            },
+            "development": {
+              "browserTarget": "mobile-client:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mobile-client:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/mobile-client/src/**/*.ts",
+              "apps/mobile-client/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/mobile-client"
+          ],
+          "options": {
+            "jestConfig": "apps/mobile-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "cap": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "--help"
+          }
+        },
+        "add": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "add",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "add ios"
+            },
+            "android": {
+              "cmd": "add android"
+            }
+          }
+        },
+        "copy": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "copy",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "copy ios"
+            },
+            "android": {
+              "cmd": "copy android"
+            }
+          }
+        },
+        "open": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "open",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "open ios"
+            },
+            "android": {
+              "cmd": "open android"
+            }
+          }
+        },
+        "sync": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "sync",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "sync ios"
+            },
+            "android": {
+              "cmd": "sync android"
+            }
+          }
+        },
+        "update": {
+          "builder": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "update",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "update ios"
+            },
+            "android": {
+              "cmd": "update android"
+            }
+          }
+        }
+      }
+    },
+    "mobile-client-e2e": {
+      "root": "apps/mobile-client-e2e",
+      "sourceRoot": "apps/mobile-client-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/mobile-client-e2e/cypress.json",
+            "tsConfig": "apps/mobile-client-e2e/tsconfig.e2e.json",
+            "devServerTarget": "mobile-client:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mobile-client:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/mobile-client-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
     "web-client": {
       "projectType": "application",
       "root": "apps/web-client",
@@ -9,7 +224,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/web-client",
             "index": "apps/web-client/src/index.html",
@@ -21,7 +238,9 @@
               "apps/web-client/src/favicon.ico",
               "apps/web-client/src/assets"
             ],
-            "styles": ["apps/web-client/src/styles.scss"],
+            "styles": [
+              "apps/web-client/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,7 +305,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/web-client"],
+          "outputs": [
+            "coverage/apps/web-client"
+          ],
           "options": {
             "jestConfig": "apps/web-client/jest.config.js",
             "passWithNoTests": true
@@ -115,7 +336,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/web-client-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/web-client-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }

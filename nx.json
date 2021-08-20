@@ -27,6 +27,13 @@
     ]
   },
   "projects": {
+    "mobile-client": {
+      "tags": []
+    },
+    "mobile-client-e2e": {
+      "tags": [],
+      "implicitDependencies": ["mobile-client"]
+    },
     "web-client": {
       "tags": []
     },
