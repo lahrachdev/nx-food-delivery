@@ -9,9 +9,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/mobile-client",
             "index": "apps/mobile-client/src/index.html",
@@ -97,9 +95,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/mobile-client"
-          ],
+          "outputs": ["coverage/apps/mobile-client"],
           "options": {
             "jestConfig": "apps/mobile-client/jest.config.js",
             "passWithNoTests": true
@@ -188,34 +184,6 @@
         }
       }
     },
-    "mobile-client-e2e": {
-      "root": "apps/mobile-client-e2e",
-      "sourceRoot": "apps/mobile-client-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/mobile-client-e2e/cypress.json",
-            "tsConfig": "apps/mobile-client-e2e/tsconfig.e2e.json",
-            "devServerTarget": "mobile-client:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "mobile-client:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/mobile-client-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
     "web-client": {
       "projectType": "application",
       "root": "apps/web-client",
@@ -224,9 +192,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/web-client",
             "index": "apps/web-client/src/index.html",
@@ -238,9 +204,7 @@
               "apps/web-client/src/favicon.ico",
               "apps/web-client/src/assets"
             ],
-            "styles": [
-              "apps/web-client/src/styles.scss"
-            ],
+            "styles": ["apps/web-client/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -305,40 +269,10 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/web-client"
-          ],
+          "outputs": ["coverage/apps/web-client"],
           "options": {
             "jestConfig": "apps/web-client/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "web-client-e2e": {
-      "root": "apps/web-client-e2e",
-      "sourceRoot": "apps/web-client-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/web-client-e2e/cypress.json",
-            "tsConfig": "apps/web-client-e2e/tsconfig.e2e.json",
-            "devServerTarget": "web-client:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "web-client:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/web-client-e2e/**/*.{js,ts}"
-            ]
           }
         }
       }

@@ -30,16 +30,8 @@
     "mobile-client": {
       "tags": []
     },
-    "mobile-client-e2e": {
-      "tags": [],
-      "implicitDependencies": ["mobile-client"]
-    },
     "web-client": {
       "tags": []
-    },
-    "web-client-e2e": {
-      "tags": [],
-      "implicitDependencies": ["web-client"]
     }
   }
 }
